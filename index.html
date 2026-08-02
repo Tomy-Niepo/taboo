@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <title>Tabú Rioplatense</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app">
+
+    <!-- SETUP SCREEN -->
+    <section id="screen-setup" class="screen active">
+      <header class="hero">
+        <h1>TABÚ</h1>
+        <p class="subtitle">Rioplatense edition</p>
+      </header>
+
+      <div class="setup-block">
+        <label class="field">
+          <span>Equipo 1 — segundos por turno</span>
+          <input type="number" id="timer-team-1" min="15" max="300" step="5" value="60" inputmode="numeric">
+        </label>
+        <label class="field">
+          <span>Equipo 2 — segundos por turno</span>
+          <input type="number" id="timer-team-2" min="15" max="300" step="5" value="60" inputmode="numeric">
+        </label>
+        <p class="hint">Podés ajustar los timers si los equipos son impares en cantidad de jugadores.</p>
+      </div>
+
+      <div class="setup-block">
+        <div class="field">
+          <span>Modo de partida</span>
+          <div class="mode-toggle">
+            <button type="button" class="mode-btn active" data-mode="libre">Libre</button>
+            <button type="button" class="mode-btn" data-mode="cap">Cap de cartas</button>
+          </div>
+        </div>
+        <label class="field" id="cap-input-wrapper" hidden>
+          <span>Cantidad de cartas para terminar</span>
+          <input type="number" id="cap-cards" min="5" max="500" step="5" value="30" inputmode="numeric">
+        </label>
+      </div>
+
+      <button id="btn-start-match" class="primary big">EMPEZAR PARTIDA</button>
+    </section>
+
+    <!-- READY SCREEN -->
+    <section id="screen-ready" class="screen">
+      <div class="ready-body">
+        <p class="eyebrow">Es el turno de</p>
+        <h2 id="ready-team-name">Equipo 1</h2>
+        <div class="score-summary">
+          <div class="score-chip">
+            <span class="label">Equipo 1</span>
+            <span class="value" id="ready-score-1">0</span>
+          </div>
+          <div class="score-chip">
+            <span class="label">Equipo 2</span>
+            <span class="value" id="ready-score-2">0</span>
+          </div>
+        </div>
+        <p class="hint">Pasá el celular al jugador que describe.<br>Alguien del otro equipo debe controlar los tabúes.</p>
+      </div>
+      <button id="btn-start-turn" class="primary big">EMPEZAR TURNO</button>
+    </section>
+
+    <!-- GAME SCREEN -->
+    <section id="screen-game" class="screen">
+      <header class="game-header">
+        <div class="team-indicator">
+          <span class="dot" id="team-dot"></span>
+          <span id="team-label">Equipo 1</span>
+        </div>
+        <div class="timer" id="timer">1:00</div>
+        <div class="turn-score">
+          <span class="label">Aciertos</span>
+          <span id="turn-score">0</span>
+        </div>
+      </header>
+
+      <div id="card-stage" class="card-stage">
+        <article id="card" class="card">
+          <h2 id="card-word">—</h2>
+          <ul id="card-taboos"></ul>
+        </article>
+        <div class="swipe-hint left">← ACIERTO</div>
+        <div class="swipe-hint right">DESCARTE →</div>
+      </div>
+
+      <footer class="game-footer">
+        <button id="btn-skip" class="btn-outline">Descarte</button>
+        <button id="btn-correct" class="primary">Acierto</button>
+      </footer>
+    </section>
+
+    <!-- TURN END SCREEN -->
+    <section id="screen-turn-end" class="screen">
+      <div class="ready-body">
+        <p class="eyebrow">Terminó el turno de</p>
+        <h2 id="end-team-name">Equipo 1</h2>
+        <p class="big-number"><span id="end-turn-score">0</span></p>
+        <p class="hint" id="end-turn-label">cartas en este turno</p>
+        <div class="score-summary">
+          <div class="score-chip">
+            <span class="label">Equipo 1</span>
+            <span class="value" id="end-score-1">0</span>
+          </div>
+          <div class="score-chip">
+            <span class="label">Equipo 2</span>
+            <span class="value" id="end-score-2">0</span>
+          </div>
+        </div>
+      </div>
+      <div class="stack">
+        <button id="btn-next-team" class="primary big">SIGUIENTE EQUIPO</button>
+        <button id="btn-end-match" class="btn-outline">Terminar partida</button>
+      </div>
+    </section>
+
+    <!-- GAME OVER SCREEN -->
+    <section id="screen-over" class="screen">
+      <div class="ready-body">
+        <p class="eyebrow">🏆 Fin de la partida</p>
+        <h2 id="winner-label">—</h2>
+        <div class="score-summary">
+          <div class="score-chip">
+            <span class="label">Equipo 1</span>
+            <span class="value" id="final-score-1">0</span>
+          </div>
+          <div class="score-chip">
+            <span class="label">Equipo 2</span>
+            <span class="value" id="final-score-2">0</span>
+          </div>
+        </div>
+      </div>
+      <button id="btn-new-match" class="primary big">NUEVA PARTIDA</button>
+    </section>
+
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>

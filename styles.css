@@ -1,0 +1,401 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --bg: #0f172a;
+  --bg-elev: #1e293b;
+  --card: #ffffff;
+  --card-taboo: #fee2e2;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dark: #0f172a;
+  --primary: #f43f5e;
+  --primary-dark: #be123c;
+  --accent: #22c55e;
+  --danger: #ef4444;
+  --team-1: #38bdf8;
+  --team-2: #fbbf24;
+  --border: #334155;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+}
+
+.screen {
+  display: none;
+  position: absolute;
+  inset: 0;
+  padding: 20px;
+  padding-top: calc(20px + env(safe-area-inset-top));
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+.screen.active { display: flex; }
+
+/* --- Setup / hero --- */
+.hero { text-align: center; margin-top: 10px; }
+.hero h1 {
+  font-size: 3.5rem;
+  margin: 0;
+  letter-spacing: 0.15em;
+  color: var(--primary);
+  font-weight: 900;
+  text-shadow: 0 4px 20px rgba(244, 63, 94, 0.35);
+}
+.hero .subtitle {
+  color: var(--text-muted);
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.setup-block {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field > span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.field input[type="number"] {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  width: 100%;
+}
+.field input[type="number"]:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.mode-toggle {
+  display: flex;
+  gap: 8px;
+  background: var(--bg);
+  padding: 4px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+.mode-btn {
+  flex: 1;
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.mode-btn.active {
+  background: var(--primary);
+  color: white;
+}
+
+/* --- Buttons --- */
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.primary {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 16px 20px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: transform 0.1s, background 0.15s;
+}
+.primary:active { transform: scale(0.97); background: var(--primary-dark); }
+.primary.big { padding: 18px; font-size: 1.15rem; margin-top: auto; }
+
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: transform 0.1s, background 0.15s;
+}
+.btn-outline:active { transform: scale(0.97); background: var(--bg-elev); }
+
+.stack { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+
+/* --- Ready / turn-end shared --- */
+.ready-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+.eyebrow {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.85rem;
+  margin: 0;
+}
+.ready-body h2 {
+  font-size: 2.4rem;
+  margin: 0;
+  font-weight: 800;
+}
+.big-number {
+  font-size: 5rem;
+  font-weight: 900;
+  color: var(--primary);
+  margin: 0;
+  line-height: 1;
+}
+
+.score-summary {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 8px;
+}
+.score-chip {
+  flex: 1;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.score-chip .label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.score-chip .value {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+/* --- Game screen --- */
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.team-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--team-1);
+}
+.dot.team-2 { background: var(--team-2); }
+
+.timer {
+  font-size: 2.5rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  padding: 4px 14px;
+  border-radius: 10px;
+  background: var(--bg-elev);
+}
+.timer.warning { color: var(--primary); animation: pulse 1s infinite; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.turn-score {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-weight: 700;
+}
+.turn-score .label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.turn-score #turn-score {
+  font-size: 1.5rem;
+  color: var(--accent);
+}
+
+/* --- Card --- */
+.card-stage {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 320px;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 3 / 4;
+  background: var(--card);
+  color: var(--text-dark);
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  touch-action: none;
+  transition: transform 0.25s ease-out, opacity 0.25s ease-out;
+  will-change: transform;
+}
+.card.dragging { transition: none; }
+.card.swipe-left { transform: translateX(-140%) rotate(-20deg) !important; opacity: 0; }
+.card.swipe-right { transform: translateX(140%) rotate(20deg) !important; opacity: 0; }
+
+.card h2 {
+  font-size: clamp(1.9rem, 8vw, 2.6rem);
+  text-align: center;
+  margin: 0 0 16px;
+  padding-bottom: 16px;
+  border-bottom: 3px solid var(--primary);
+  color: var(--text-dark);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  word-break: break-word;
+}
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.card ul li {
+  background: var(--card-taboo);
+  color: #7f1d1d;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: clamp(0.95rem, 4vw, 1.15rem);
+  font-weight: 600;
+  text-align: center;
+  text-transform: lowercase;
+}
+
+.swipe-hint {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  transition: opacity 0.15s;
+  pointer-events: none;
+}
+.swipe-hint.left {
+  left: 12px;
+  background: var(--accent);
+  color: white;
+}
+.swipe-hint.right {
+  right: 12px;
+  background: var(--danger);
+  color: white;
+}
+.card-stage.hint-left .swipe-hint.left { opacity: 1; }
+.card-stage.hint-right .swipe-hint.right { opacity: 1; }
+
+.game-footer {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.game-footer button {
+  flex: 1;
+}
+#btn-skip {
+  border-color: var(--danger);
+  color: #fca5a5;
+}
+#btn-correct {
+  background: var(--accent);
+}
+#btn-correct:active { background: #15803d; }
+
+/* --- Team-colored variants on ready/end screens --- */
+.team-1 { color: var(--team-1); }
+.team-2 { color: var(--team-2); }
+
+#winner-label { color: var(--primary); }
