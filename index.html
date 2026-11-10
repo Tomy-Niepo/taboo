@@ -18,14 +18,15 @@
       </header>
 
       <div class="setup-block">
-        <div class="field">
-          <span>Tiempo</span>
-          <div class="mode-toggle">
-            <button type="button" class="time-btn active" data-timed="true">Con tiempo</button>
-            <button type="button" class="time-btn" data-timed="false">Sin tiempo ∞</button>
-          </div>
-        </div>
-        <p class="hint" id="endless-hint" hidden>Modo chill: sin reloj. Pasá el celu cuando quieran con “Pasar turno”.</p>
+        <label class="switch-row">
+          <span class="switch-text">
+            <strong>Sin tiempo ∞</strong>
+            <small>Modo chill, sin reloj</small>
+          </span>
+          <input type="checkbox" id="endless-toggle" class="switch-input">
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+        <p class="hint" id="endless-hint" hidden>Pasá el celu cuando quieran con “Pasar turno”.</p>
         <div id="timer-inputs-wrapper" class="field-group">
         <label class="field">
           <span>Equipo 1 — segundos por turno</span>

@@ -101,15 +101,15 @@
       });
     });
 
-    document.querySelectorAll('.time-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        state.timed = btn.dataset.timed === 'true';
-        $('timer-inputs-wrapper').hidden = !state.timed;
-        $('endless-hint').hidden = state.timed;
-      });
-    });
+    const endlessToggle = $('endless-toggle');
+    const syncEndless = () => {
+      state.timed = !endlessToggle.checked;
+      $('timer-inputs-wrapper').hidden = !state.timed;
+      $('endless-hint').hidden = state.timed;
+    };
+    endlessToggle.addEventListener('change', syncEndless);
+    // Browsers may restore the checkbox on reload
+    syncEndless();
 
     $('btn-start-match').addEventListener('click', () => {
       const t1 = clamp(parseInt($('timer-team-1').value, 10) || 60, 15, 300);
