@@ -18,6 +18,15 @@
       </header>
 
       <div class="setup-block">
+        <div class="field">
+          <span>Tiempo</span>
+          <div class="mode-toggle">
+            <button type="button" class="time-btn active" data-timed="true">Con tiempo</button>
+            <button type="button" class="time-btn" data-timed="false">Sin tiempo ∞</button>
+          </div>
+        </div>
+        <p class="hint" id="endless-hint" hidden>Modo chill: sin reloj. Pasá el celu cuando quieran con “Pasar turno”.</p>
+        <div id="timer-inputs-wrapper" class="field-group">
         <label class="field">
           <span>Equipo 1 — segundos por turno</span>
           <input type="number" id="timer-team-1" min="15" max="300" step="5" value="60" inputmode="numeric">
@@ -27,6 +36,7 @@
           <input type="number" id="timer-team-2" min="15" max="300" step="5" value="60" inputmode="numeric">
         </label>
         <p class="hint">Podés ajustar los timers si los equipos son impares en cantidad de jugadores.</p>
+        </div>
       </div>
 
       <div class="setup-block">
@@ -93,6 +103,7 @@
         <button id="btn-skip" class="btn-outline">Descarte</button>
         <button id="btn-correct" class="primary">Acierto</button>
       </footer>
+      <button id="btn-pass-turn" class="btn-outline" hidden>Pasar turno</button>
     </section>
 
     <!-- TURN END SCREEN -->

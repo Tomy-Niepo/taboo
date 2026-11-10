@@ -9,6 +9,7 @@
     turnScore: 0,
     currentTeam: 0,
     timerSeconds: [60, 60],
+    timed: true,
     mode: 'libre',
     cardCap: 30,
     cardsPlayed: 0,
@@ -100,6 +101,16 @@
       });
     });
 
+    document.querySelectorAll('.time-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.timed = btn.dataset.timed === 'true';
+        $('timer-inputs-wrapper').hidden = !state.timed;
+        $('endless-hint').hidden = state.timed;
+      });
+    });
+
     $('btn-start-match').addEventListener('click', () => {
       const t1 = clamp(parseInt($('timer-team-1').value, 10) || 60, 15, 300);
       const t2 = clamp(parseInt($('timer-team-2').value, 10) || 60, 15, 300);
@@ -151,11 +162,18 @@
     $('team-label').className = state.currentTeam === 0 ? 'team-1' : 'team-2';
     $('team-dot').className = state.currentTeam === 0 ? 'dot' : 'dot team-2';
     $('turn-score').textContent = '0';
-    state.timeLeft = state.timerSeconds[state.currentTeam];
-    updateTimerDisplay();
+    $('btn-pass-turn').hidden = state.timed;
     showScreen('game');
+    if (state.timed) {
+      state.timeLeft = state.timerSeconds[state.currentTeam];
+      updateTimerDisplay();
+      startTimer();
+    } else {
+      stopTimer();
+      $('timer').textContent = '∞';
+      $('timer').classList.remove('warning');
+    }
     drawCard();
-    startTimer();
   }
 
   function startTimer() {
@@ -284,6 +302,7 @@
   // ---------- Buttons: manual accept/discard ----------
   $('btn-correct').addEventListener('click', acceptCard);
   $('btn-skip').addEventListener('click', discardCard);
+  $('btn-pass-turn').addEventListener('click', () => endTurn());
 
   // ---------- Swipe gestures ----------
   const SWIPE_THRESHOLD = 90;

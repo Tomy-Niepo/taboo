@@ -134,7 +134,26 @@ html, body {
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
 }
-.mode-btn.active {
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.field-group[hidden] { display: none; }
+.time-btn {
+  flex: 1;
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.mode-btn.active,
+.time-btn.active {
   background: var(--primary);
   color: white;
 }
@@ -393,6 +412,11 @@ button {
   background: var(--accent);
 }
 #btn-correct:active { background: #15803d; }
+#btn-pass-turn {
+  flex-shrink: 0;
+  padding: 10px 20px;
+}
+#btn-pass-turn[hidden] { display: none; }
 
 /* --- Team-colored variants on ready/end screens --- */
 .team-1 { color: var(--team-1); }
